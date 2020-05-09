@@ -45,7 +45,6 @@ class Knight
     return "Please select a legal move" if bad_move?(start + finish)
     start = add_children(start)
     queue = [start]
-    results = []
     until queue.empty?
       current = queue.shift
       add_children(current) if current.children.empty?
@@ -53,10 +52,8 @@ class Knight
         if child.coordinates == finish
           path = get_path_from(child, start)
           display_path([start.coordinates] + path.reverse)
-          puts "\nIt took #{path.size} moves"
           return
         end
-        results << [current.coordinates, child.coordinates]
         queue << add_children(child)
       end
     end
@@ -70,10 +67,11 @@ class Knight
   end
 
   def display_path path_array
+    puts "It took #{path_array.size - 1} moves. The shortest path is:"
     path_array.each { |square| print "#{square} "}
   end
 
-  def get_path_from start, destination)
+  def get_path_from start, destination
     coord_path = []
     current = start
     until current.coordinates == destination.coordinates

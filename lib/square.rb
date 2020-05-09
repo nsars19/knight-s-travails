@@ -1,12 +1,10 @@
-class Square #or Vertex
-  attr_reader :x_coord, :y_coord
+class Square #or Vertex/Node
+  attr_accessor :children, :parent
+  attr_reader :coordinates
   
   def initialize x_coordinate, y_coordinate
-    @x_coord = x_coordinate
-    @y_coord = y_coordinate
-  end
-
-  def coordinates
-    [@x_coord, @y_coord]
+    @coordinates = [x_coordinate, y_coordinate]
+    @children = []
+    @parent = nil
   end
 end
